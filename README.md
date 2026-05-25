@@ -16,7 +16,8 @@ A browser chess game built with plain HTML, CSS, and JavaScript, plus a Spring B
 Run a static server from the project root:
 
 ```powershell
-cd C:\Users\Usuario\Desktop\chess
+git clone https://github.com/doyylex/chess.git
+cd chess
 python -m http.server 8000
 ```
 
@@ -31,7 +32,7 @@ http://127.0.0.1:8000/
 Run Spring Boot:
 
 ```powershell
-cd C:\Users\Usuario\Desktop\chess\backend
+cd backend
 mvn spring-boot:run
 ```
 
