@@ -1,0 +1,17 @@
+# Build outputs
+backend/target/
+
+# Runtime logs
+*.log
+
+# Local environment files
+.env
+.env.*
+
+# Editor and OS files
+.idea/
+.vscode/
+*.swp
+*.swo
+Thumbs.db
+Desktop.ini

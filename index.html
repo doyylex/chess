@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local Chess</title>
+    <link
+      rel="stylesheet"
+      href="vendor/chessboard/chessboard-1.0.0.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css?v=offline-vendor-1" />
+  </head>
+  <body data-theme="principal" data-language="en">
+    <section
+      id="start-menu"
+      class="start-menu"
+      aria-label="Start menu"
+      data-i18n-aria-label="start.aria"
+    >
+      <div class="start-menu-inner">
+        <div class="start-menu-content">
+          <p class="eyebrow" data-i18n="start.kicker">Chess club</p>
+          <h1 data-i18n="app.name">Chess</h1>
+          <p class="start-lede" data-i18n="start.lede">
+            Choose how to play: a local game, an adjustable AI opponent, or an
+            online room by code.
+          </p>
+
+          <div class="mode-actions">
+            <button id="start-local-button" class="mode-button" type="button">
+              <img
+                class="mode-icon"
+                src="vendor/pieces/wikipedia/wN.png"
+                alt=""
+              />
+              <span data-i18n="mode.local.title">Play local</span>
+              <small data-i18n="mode.local.description">Two players in this browser</small>
+            </button>
+            <button id="start-ai-button" class="mode-button" type="button">
+              <img
+                class="mode-icon"
+                src="vendor/pieces/wikipedia/wQ.png"
+                alt=""
+              />
+              <span data-i18n="mode.ai.title">Play vs AI</span>
+              <small data-i18n="mode.ai.description">Choose a difficulty before starting</small>
+            </button>
+            <button id="start-online-button" class="mode-button" type="button">
+              <img
+                class="mode-icon"
+                src="vendor/pieces/wikipedia/wK.png"
+                alt=""
+              />
+              <span data-i18n="mode.online.title">Play online</span>
+              <small data-i18n="mode.online.description">Create a room or join with a code</small>
+            </button>
+          </div>
+
+          <div class="style-actions">
+            <button id="style-menu-button" class="style-menu-button" type="button">
+              <span data-i18n="style.button">Styles</span>
+            </button>
+            <button id="language-menu-button" class="style-menu-button" type="button">
+              <span data-i18n="language.button">Language</span>
+            </button>
+          </div>
+
+          <div
+            id="style-panel"
+            class="style-panel panel-hidden"
+            aria-label="Visual style selection"
+            data-i18n-aria-label="styles.aria"
+          >
+            <div class="style-panel-header">
+              <div>
+                <p class="style-panel-kicker" data-i18n="styles.kicker">Styles</p>
+                <h2 data-i18n="styles.title">Choose the atmosphere</h2>
+                <p data-i18n="styles.description">Change the complete look of the board, menus, and modals.</p>
+              </div>
+              <button
+                id="style-menu-close-button"
+                class="style-menu-close-button"
+                type="button"
+                aria-label="Close styles menu"
+                data-i18n-aria-label="styles.close"
+              >
+                X
+              </button>
+            </div>
+            <div class="style-card-grid" aria-label="Visual styles" data-i18n-aria-label="styles.grid">
+              <button class="style-card" type="button" data-theme-choice="principal">
+                <span class="style-swatch style-swatch-principal" aria-hidden="true"></span>
+                <span data-i18n="styles.principal.title">Principal</span>
+                <small data-i18n="styles.principal.description">Dark club, deep greens, and soft gold</small>
+              </button>
+              <button class="style-card" type="button" data-theme-choice="neon">
+                <span class="style-swatch style-swatch-neon" aria-hidden="true"></span>
+                <span data-i18n="styles.neon.title">Modern neon</span>
+                <small data-i18n="styles.neon.description">Futuristic contrast with cyan, magenta, and lime</small>
+              </button>
+              <button class="style-card" type="button" data-theme-choice="tournament">
+                <span class="style-swatch style-swatch-tournament" aria-hidden="true"></span>
+                <span data-i18n="styles.tournament.title">Tournament</span>
+                <small data-i18n="styles.tournament.description">Competitive green, beige, and soft red alerts</small>
+              </button>
+              <button class="style-card" type="button" data-theme-choice="wood">
+                <span class="style-swatch style-swatch-wood" aria-hidden="true"></span>
+                <span data-i18n="styles.wood.title">Wood</span>
+                <small data-i18n="styles.wood.description">Classic board, honey, walnut, and dark leather</small>
+              </button>
+            </div>
+          </div>
+
+          <div
+            id="language-panel"
+            class="style-panel language-panel panel-hidden"
+            aria-label="Language selection"
+            data-i18n-aria-label="language.aria"
+          >
+            <div class="style-panel-header">
+              <div>
+                <p class="style-panel-kicker" data-i18n="language.kicker">Language</p>
+                <h2 data-i18n="language.title">Choose your language</h2>
+                <p data-i18n="language.description">The interface will update immediately and remember your choice.</p>
+              </div>
+              <button
+                id="language-menu-close-button"
+                class="style-menu-close-button"
+                type="button"
+                aria-label="Close language menu"
+                data-i18n-aria-label="language.close"
+              >
+                X
+              </button>
+            </div>
+            <div class="style-card-grid" aria-label="Languages" data-i18n-aria-label="language.grid">
+              <button class="style-card language-card" type="button" data-language-choice="en">
+                <span class="style-swatch language-swatch language-swatch-en" aria-hidden="true">EN</span>
+                <span data-i18n="language.en.title">English</span>
+                <small data-i18n="language.en.description">Default interface language</small>
+              </button>
+              <button class="style-card language-card" type="button" data-language-choice="es">
+                <span class="style-swatch language-swatch language-swatch-es" aria-hidden="true">ES</span>
+                <span data-i18n="language.es.title">Español</span>
+                <small data-i18n="language.es.description">Full interface in Spanish</small>
+              </button>
+            </div>
+          </div>
+
+          <div
+            id="difficulty-panel"
+            class="difficulty-panel panel-hidden"
+            aria-label="Difficulty selection"
+            data-i18n-aria-label="ai.aria"
+          >
+            <div class="ai-panel-header">
+              <div>
+                <p class="ai-panel-kicker" data-i18n="ai.kicker">Vs AI</p>
+                <h2 data-i18n="ai.title">Choose your opponent</h2>
+                <p data-i18n="ai.description">Select a difficulty to start as White.</p>
+              </div>
+              <button
+                id="ai-menu-close-button"
+                class="ai-menu-close-button"
+                type="button"
+                aria-label="Close AI menu"
+                data-i18n-aria-label="ai.close"
+              >
+                X
+              </button>
+            </div>
+            <div class="difficulty-card-grid" aria-label="Difficulties" data-i18n-aria-label="ai.grid">
+              <button
+                class="difficulty-card"
+                type="button"
+                data-difficulty="easy"
+              >
+                <img
+                  class="difficulty-card-icon"
+                  src="vendor/pieces/wikipedia/wP.png"
+                  alt=""
+                />
+                <span data-i18n="difficulty.easy.label">Easy</span>
+                <small data-i18n="difficulty.easy.description">Simple AI, makes mistakes and plays with lots of randomness</small>
+              </button>
+              <button
+                class="difficulty-card"
+                type="button"
+                data-difficulty="normal"
+              >
+                <img
+                  class="difficulty-card-icon"
+                  src="vendor/pieces/wikipedia/wN.png"
+                  alt=""
+                />
+                <span data-i18n="difficulty.normal.label">Normal</span>
+                <small data-i18n="difficulty.normal.description">Simple AI, more organized but still beatable</small>
+              </button>
+              <button
+                class="difficulty-card"
+                type="button"
+                data-difficulty="hard"
+              >
+                <img
+                  class="difficulty-card-icon"
+                  src="vendor/pieces/wikipedia/wB.png"
+                  alt=""
+                />
+                <span data-i18n="difficulty.hard.label">Hard</span>
+                <small data-i18n="difficulty.hard.description">Stockfish with controlled strength</small>
+              </button>
+              <button
+                class="difficulty-card"
+                type="button"
+                data-difficulty="expert"
+              >
+                <img
+                  class="difficulty-card-icon"
+                  src="vendor/pieces/wikipedia/wQ.png"
+                  alt=""
+                />
+                <span data-i18n="difficulty.expert.label">Expert</span>
+                <small data-i18n="difficulty.expert.description">Strong Stockfish, for suffering elegantly</small>
+              </button>
+            </div>
+            <div class="ai-compat-controls" aria-hidden="true">
+              <label class="engine-select-label" for="ai-difficulty">
+                <span data-i18n="ai.compatLabel">Difficulty</span>
+              </label>
+              <select id="ai-difficulty" tabindex="-1">
+                <option value="easy" data-i18n="difficulty.easy.label">Easy</option>
+                <option value="normal" selected data-i18n="difficulty.normal.label">Normal</option>
+                <option value="hard" data-i18n="difficulty.hard.label">Hard</option>
+                <option value="expert" data-i18n="difficulty.expert.label">Expert</option>
+              </select>
+              <button id="start-ai-confirm-button" type="button" tabindex="-1">
+                <span data-i18n="ai.start">Start vs AI</span>
+              </button>
+            </div>
+          </div>
+          <div
+            id="online-panel"
+            class="online-panel panel-hidden"
+            aria-label="Online room"
+            data-i18n-aria-label="online.aria"
+          >
+            <div class="online-panel-header">
+              <div>
+                <p class="online-panel-kicker" data-i18n="online.kicker">Online</p>
+                <h2 data-i18n="online.title">Create or join a room</h2>
+                <p data-i18n="online.description">Set up a private game by code, no login required.</p>
+              </div>
+              <button
+                id="online-menu-close-button"
+                class="online-menu-close-button"
+                type="button"
+                aria-label="Close online menu"
+                data-i18n-aria-label="online.close"
+              >
+                X
+              </button>
+            </div>
+            <div id="online-choice-actions" class="online-choice-actions">
+              <button
+                id="create-room-button"
+                class="online-choice-button"
+                type="button"
+              >
+                <img
+                  class="online-choice-icon"
+                  src="vendor/pieces/wikipedia/wR.png"
+                  alt=""
+                />
+                <span data-i18n="online.create.title">Create room</span>
+                <small data-i18n="online.create.description">Generate a code to share</small>
+              </button>
+              <button
+                id="show-join-room-button"
+                class="online-choice-button"
+                type="button"
+              >
+                <img
+                  class="online-choice-icon"
+                  src="vendor/pieces/wikipedia/wB.png"
+                  alt=""
+                />
+                <span data-i18n="online.join.title">Join room</span>
+                <small data-i18n="online.join.description">Enter with someone else's code</small>
+              </button>
+            </div>
+            <div id="online-join-form" class="online-join-form panel-hidden">
+              <label class="engine-select-label" for="room-code-input">
+                <span data-i18n="online.roomCode">Room code</span>
+              </label>
+              <div class="online-code-row">
+                <input
+                  id="room-code-input"
+                  type="text"
+                  maxlength="6"
+                  autocomplete="off"
+                  placeholder="ABC123"
+                />
+                <button id="join-room-button" type="button" data-i18n="online.joinButton">Join</button>
+                <button id="online-back-button" type="button" data-i18n="online.back">Back</button>
+              </div>
+            </div>
+            <p id="online-menu-status" class="engine-status" data-state="loading">
+              Choose whether to create a room or join with a code.
+            </p>
+          </div>
+        </div>
+
+        <div class="start-visual" aria-hidden="true">
+          <div class="start-board-shell">
+            <div class="start-board">
+              <img class="preview-piece" style="--c: 0; --r: 0" src="vendor/pieces/wikipedia/bR.png" alt="" />
+              <img class="preview-piece" style="--c: 1; --r: 0" src="vendor/pieces/wikipedia/bN.png" alt="" />
+              <img class="preview-piece" style="--c: 2; --r: 0" src="vendor/pieces/wikipedia/bB.png" alt="" />
+              <img class="preview-piece" style="--c: 3; --r: 0" src="vendor/pieces/wikipedia/bQ.png" alt="" />
+              <img class="preview-piece" style="--c: 4; --r: 0" src="vendor/pieces/wikipedia/bK.png" alt="" />
+              <img class="preview-piece" style="--c: 5; --r: 0" src="vendor/pieces/wikipedia/bB.png" alt="" />
+              <img class="preview-piece" style="--c: 6; --r: 0" src="vendor/pieces/wikipedia/bN.png" alt="" />
+              <img class="preview-piece" style="--c: 7; --r: 0" src="vendor/pieces/wikipedia/bR.png" alt="" />
+              <img class="preview-piece" style="--c: 0; --r: 1" src="vendor/pieces/wikipedia/bP.png" alt="" />
+              <img class="preview-piece" style="--c: 1; --r: 1" src="vendor/pieces/wikipedia/bP.png" alt="" />
+              <img class="preview-piece" style="--c: 2; --r: 1" src="vendor/pieces/wikipedia/bP.png" alt="" />
+              <img class="preview-piece" style="--c: 3; --r: 1" src="vendor/pieces/wikipedia/bP.png" alt="" />
+              <img class="preview-piece" style="--c: 4; --r: 1" src="vendor/pieces/wikipedia/bP.png" alt="" />
+              <img class="preview-piece" style="--c: 5; --r: 1" src="vendor/pieces/wikipedia/bP.png" alt="" />
+              <img class="preview-piece" style="--c: 6; --r: 1" src="vendor/pieces/wikipedia/bP.png" alt="" />
+              <img class="preview-piece" style="--c: 7; --r: 1" src="vendor/pieces/wikipedia/bP.png" alt="" />
+              <img class="preview-piece" style="--c: 0; --r: 6" src="vendor/pieces/wikipedia/wP.png" alt="" />
+              <img class="preview-piece" style="--c: 1; --r: 6" src="vendor/pieces/wikipedia/wP.png" alt="" />
+              <img class="preview-piece" style="--c: 2; --r: 6" src="vendor/pieces/wikipedia/wP.png" alt="" />
+              <img class="preview-piece" style="--c: 3; --r: 6" src="vendor/pieces/wikipedia/wP.png" alt="" />
+              <img class="preview-piece" style="--c: 4; --r: 6" src="vendor/pieces/wikipedia/wP.png" alt="" />
+              <img class="preview-piece" style="--c: 5; --r: 6" src="vendor/pieces/wikipedia/wP.png" alt="" />
+              <img class="preview-piece" style="--c: 6; --r: 6" src="vendor/pieces/wikipedia/wP.png" alt="" />
+              <img class="preview-piece" style="--c: 7; --r: 6" src="vendor/pieces/wikipedia/wP.png" alt="" />
+              <img class="preview-piece" style="--c: 0; --r: 7" src="vendor/pieces/wikipedia/wR.png" alt="" />
+              <img class="preview-piece" style="--c: 1; --r: 7" src="vendor/pieces/wikipedia/wN.png" alt="" />
+              <img class="preview-piece" style="--c: 2; --r: 7" src="vendor/pieces/wikipedia/wB.png" alt="" />
+              <img class="preview-piece" style="--c: 3; --r: 7" src="vendor/pieces/wikipedia/wQ.png" alt="" />
+              <img class="preview-piece" style="--c: 4; --r: 7" src="vendor/pieces/wikipedia/wK.png" alt="" />
+              <img class="preview-piece" style="--c: 5; --r: 7" src="vendor/pieces/wikipedia/wB.png" alt="" />
+              <img class="preview-piece" style="--c: 6; --r: 7" src="vendor/pieces/wikipedia/wN.png" alt="" />
+              <img class="preview-piece" style="--c: 7; --r: 7" src="vendor/pieces/wikipedia/wR.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main id="game-app" class="app screen-hidden">
+      <section class="board-section" aria-label="Chessboard" data-i18n-aria-label="game.boardAria">
+        <div id="board" class="board"></div>
+      </section>
+
+      <aside class="status-panel" aria-label="Game status" data-i18n-aria-label="game.statusAria">
+        <div>
+          <p id="app-eyebrow" class="eyebrow">Local game</p>
+          <h1 data-i18n="app.name">Chess</h1>
+          <p id="mode-label" class="description">Mode: Local</p>
+          <p id="difficulty-label" class="description mode-detail panel-hidden">
+            Difficulty: Normal
+          </p>
+          <p id="online-label" class="description mode-detail panel-hidden">
+            Online room: -
+          </p>
+        </div>
+
+        <dl class="status-list">
+          <div>
+            <dt data-i18n="game.turn">Turn</dt>
+            <dd id="turn">White</dd>
+          </div>
+          <div>
+            <dt data-i18n="game.lastMove">Last move</dt>
+            <dd id="last-move">None</dd>
+          </div>
+          <div>
+            <dt data-i18n="game.status">Status</dt>
+            <dd id="game-status">Game in progress</dd>
+          </div>
+        </dl>
+
+        <section class="engine-panel" aria-label="Connection status" data-i18n-aria-label="game.connectionAria">
+          <p id="engine-status" class="engine-status" data-state="loading" data-i18n="engine.loading">
+            Loading Stockfish...
+          </p>
+        </section>
+
+        <section id="online-chat" class="online-chat" aria-label="Online chat" data-i18n-aria-label="chat.aria">
+          <div class="online-chat-header">
+            <p data-i18n="chat.title">Chat</p>
+            <span data-i18n="chat.live">Live</span>
+          </div>
+          <div
+            id="chat-messages"
+            class="chat-messages"
+            role="log"
+            aria-live="polite"
+            aria-relevant="additions"
+          >
+            <p id="chat-empty" class="chat-empty" data-i18n="chat.empty">No messages yet.</p>
+          </div>
+          <p id="chat-status" class="chat-status" data-state="idle"></p>
+          <form id="chat-form" class="chat-form" autocomplete="off">
+            <input
+              id="chat-input"
+              type="text"
+              maxlength="200"
+              placeholder="Message..."
+              aria-label="Chat message"
+              data-i18n-placeholder="chat.placeholder"
+              data-i18n-aria-label="chat.inputAria"
+            />
+            <button id="chat-send-button" type="submit" data-i18n="chat.send">Send</button>
+          </form>
+        </section>
+
+        <div class="game-actions">
+          <button id="reset-button" type="button" data-i18n="game.reset">Restart</button>
+          <button id="change-mode-button" type="button" data-i18n="game.changeMode">Change mode</button>
+        </div>
+
+      </aside>
+    </main>
+
+    <!-- Pawn promotion modal -->
+    <div
+      id="promotion-modal"
+      class="modal-overlay hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="promotion-title"
+      aria-describedby="promotion-description"
+    >
+      <div class="modal-card promotion-card">
+        <button
+          id="promotion-close-button"
+          class="promotion-close-button"
+          type="button"
+          aria-label="Close promotion"
+          data-i18n-aria-label="promotion.close"
+        >
+          X
+        </button>
+        <p class="promotion-kicker" data-i18n="promotion.kicker">Promotion</p>
+        <h2 id="promotion-title" data-i18n="promotion.title">Choose a piece</h2>
+        <p id="promotion-description" data-i18n="promotion.description">
+          Your pawn reached the end of the board. Select what it becomes.
+        </p>
+        <div class="promotion-options">
+          <button type="button" class="promotion-btn" data-piece="q">
+            <img id="promo-img-q" src="" alt="Queen" data-i18n-alt="piece.queen" />
+            <span data-i18n="piece.queen">Queen</span>
+          </button>
+          <button type="button" class="promotion-btn" data-piece="r">
+            <img id="promo-img-r" src="" alt="Rook" data-i18n-alt="piece.rook" />
+            <span data-i18n="piece.rook">Rook</span>
+          </button>
+          <button type="button" class="promotion-btn" data-piece="b">
+            <img id="promo-img-b" src="" alt="Bishop" data-i18n-alt="piece.bishop" />
+            <span data-i18n="piece.bishop">Bishop</span>
+          </button>
+          <button type="button" class="promotion-btn" data-piece="n">
+            <img id="promo-img-n" src="" alt="Knight" data-i18n-alt="piece.knight" />
+            <span data-i18n="piece.knight">Knight</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="result-modal"
+      class="modal-overlay hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="result-title"
+      aria-describedby="result-reason result-detail"
+    >
+      <div class="modal-card result-card">
+        <p id="result-kicker" class="result-kicker" data-i18n="result.kicker">Result</p>
+        <h2 id="result-title">YOU WON</h2>
+        <p id="result-reason" class="result-reason">Checkmate.</p>
+        <p id="result-detail" class="result-detail">White wins.</p>
+        <div class="result-actions">
+          <button id="result-primary-button" type="button" data-i18n="game.reset">Restart</button>
+          <button id="result-menu-button" type="button" data-i18n="result.changeMode">
+            Change mode
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="vendor/jquery/jquery-3.7.1.min.js"></script>
+    <script src="vendor/chessboard/chessboard-1.0.0.min.js"></script>
+    <script src="vendor/chessjs/chess-0.12.1.min.js"></script>
+    <script src="js/profiler.js?v=contract-1"></script>
+    <script src="js/sounds.js"></script>
+    <script src="js/i18n.js?v=contract-1"></script>
+    <script src="js/engine.js?v=contract-1"></script>
+    <script src="js/simple-ai.js"></script>
+    <script src="js/config.js?v=contract-1"></script>
+    <script src="js/game-status.js?v=contract-1"></script>
+    <script src="js/move-sound-events.js?v=contract-1"></script>
+    <script src="js/ai-controller.js?v=contract-1"></script>
+    <script src="js/theme-ui.js?v=split-main-1"></script>
+    <script src="js/result-modal.js?v=contract-1"></script>
+    <script src="js/promotion-modal.js?v=split-main-1"></script>
+    <script src="js/move-hints.js?v=split-main-1"></script>
+    <script src="js/online-client.js?v=contract-1"></script>
+    <script src="js/main.js?v=contract-1"></script>
+  </body>
+</html>
